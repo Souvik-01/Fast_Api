@@ -9,7 +9,7 @@ settings = get_settings()
 
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
+
 
 
 def get_password_hash(password):
@@ -28,8 +28,7 @@ async def create_access_token(data,  expiry: timedelta):
     payload.update({"exp": expire_in})
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
 
-async def create_refresh_token(data):
-    return jwt.encode(data, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
 
 def get_token_payload(token):
     try:
